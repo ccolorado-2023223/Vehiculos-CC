@@ -3,12 +3,12 @@ import styled from 'styled-components';
 import { createVehiculo, updateVehiculo } from '../api.js';
 
 export default function VehicleForm({ vehiculo, onClose, onRefresh }) {
-  const [form, setForm] = useState({ marca: '', modelo: '', motor: '' });
+  const [form, setForm] = useState({
+    marca: '', modelo: '', motor: '', placa: '', color: '', tracción: ''
+  });
 
   useEffect(() => {
-    if (vehiculo) {
-      setForm(vehiculo);
-    }
+    if (vehiculo) setForm(vehiculo);
   }, [vehiculo]);
 
   const handleChange = e => {
@@ -28,15 +28,20 @@ export default function VehicleForm({ vehiculo, onClose, onRefresh }) {
 
   return (
     <Overlay>
-      <FormCard>
-        <h3>{vehiculo ? 'Editar' : 'Crear'} Vehículo</h3>
-        <form onSubmit={handleSubmit}>
+      <FormCard onSubmit={handleSubmit}>
+        <h2>{vehiculo ? 'Editar Vehículo' : 'Registrar Vehículo'}</h2>
+        <FormGroup>
           <Input name="marca" value={form.marca} onChange={handleChange} placeholder="Marca" required />
           <Input name="modelo" value={form.modelo} onChange={handleChange} placeholder="Modelo" required />
           <Input name="motor" value={form.motor} onChange={handleChange} placeholder="Motor" required />
-          <Button type="submit">Guardar</Button>
-          <Button type="button" onClick={onClose}>Cancelar</Button>
-        </form>
+          <Input name="placa" value={form.placa} onChange={handleChange} placeholder="Placa" required />
+          <Input name="color" value={form.color} onChange={handleChange} placeholder="Color" required />
+          <Input name="tracción" value={form.tracción} onChange={handleChange} placeholder="Tracción" required />
+        </FormGroup>
+        <ButtonGroup>
+          <SubmitButton type="submit">Guardar</SubmitButton>
+          <CancelButton type="button" onClick={onClose}>Cancelar</CancelButton>
+        </ButtonGroup>
       </FormCard>
     </Overlay>
   );
@@ -44,30 +49,60 @@ export default function VehicleForm({ vehiculo, onClose, onRefresh }) {
 
 const Overlay = styled.div`
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
   background: rgba(0,0,0,0.4);
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 1rem;
 `;
 
-const FormCard = styled.div`
+const FormCard = styled.form`
   background: white;
-  padding: 2rem;
   border-radius: 1rem;
-  width: 90%;
-  max-width: 400px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+`;
+
+const FormGroup = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 `;
 
 const Input = styled.input`
-  display: block;
-  margin-bottom: 1rem;
-  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
 `;
 
-const Button = styled.button`
-  margin-right: 1rem;
+const ButtonGroup = styled.div`
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+`;
+
+const SubmitButton = styled.button`
+  background-color: #28a745;
+  color: white;
+  padding: 0.6rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #218838;
+  }
+`;
+
+const CancelButton = styled(SubmitButton)`
+  background-color: #6c757d;
+
+  &:hover {
+    background-color: #5a6268;
+  }
 `;

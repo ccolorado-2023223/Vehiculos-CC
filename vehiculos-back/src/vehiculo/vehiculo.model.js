@@ -1,6 +1,5 @@
 import mysql from 'mysql2';
 import dotenv from 'dotenv';
-
 dotenv.config();
 
 const db = mysql.createConnection({
@@ -24,12 +23,15 @@ db.connect((err) => {
           id INT AUTO_INCREMENT PRIMARY KEY,
           marca VARCHAR(50),
           modelo VARCHAR(50),
-          motor VARCHAR(50)
+          motor VARCHAR(50),
+          placa VARCHAR(10),
+          color VARCHAR(25),
+          tracción VARCHAR(15)
         )
       `;
       db.query(table, (err) => {
         if (err) throw err;
-        console.log('Tabla "vehiculos" verificada/creada.');
+        console.log('Tabla "vehiculos" verificada o creada');
       });
     });
   });
