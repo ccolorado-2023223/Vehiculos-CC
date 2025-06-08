@@ -5,14 +5,12 @@ dotenv.config();
 const connection = await mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
-  password: process.env.DB_PASSWORD
-})
+  password: process.env.DB_PASSWORD,
+  port: process.env.DB_PORT,
+  database: process.env.DB_NAME
+});
 
-await connection.query(`CREATE DATABASE IF NOT EXISTS ${process.env.DB_NAME}`);
-
-await connection.query(`USE ${process.env.DB_NAME}`);
-
-const createTableQuery = `
+await connection.query(`
   CREATE TABLE IF NOT EXISTS vehiculos (
     id INT AUTO_INCREMENT PRIMARY KEY,
     marca VARCHAR(50),
@@ -21,11 +19,9 @@ const createTableQuery = `
     placa VARCHAR(10) UNIQUE,
     color VARCHAR(25),
     tracción VARCHAR(15)
-  )
-`;
+  );
+`);
 
-await connection.query(createTableQuery);
+console.log('Base de datos y tabla listas');
 
-console.log('Base de datos y tabla listas')
-
-export default connection
+export default connection;
