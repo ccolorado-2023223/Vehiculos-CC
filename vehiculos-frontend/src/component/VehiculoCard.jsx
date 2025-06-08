@@ -14,7 +14,7 @@ export default function VehicleCard({ vehiculo, onEdit, onDelete }) {
         <Button variant="delete" onClick={onDelete}>Eliminar</Button>
       </ButtonGroup>
     </Card>
-  );
+  )
 }
 
 
@@ -41,13 +41,13 @@ const Card = styled.div`
   @media (max-width: 768px) {
     min-height: auto;
   }
-`;
+`
 
 const ButtonGroup = styled.div`
   display: flex;
   justify-content: flex-end;
   gap: 0.5rem;
-`;
+`
 
 const Button = styled.button`
   background: ${({ variant }) => (variant === 'delete' ? '#dc3545' : '#007bff')};
@@ -61,4 +61,4 @@ const Button = styled.button`
   &:hover {
     background: ${({ variant }) => (variant === 'delete' ? '#c82333' : '#0056b3')};
   }
-`;
+`

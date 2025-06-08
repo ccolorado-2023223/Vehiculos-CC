@@ -6,33 +6,33 @@ import styled from 'styled-components';
 
 
 export default function Home() {
-  const [vehiculos, setVehiculos] = useState([]);
-  const [editing, setEditing] = useState(null);
-  const [showForm, setShowForm] = useState(false);
+  const [vehiculos, setVehiculos] = useState([])
+  const [editing, setEditing] = useState(null)
+  const [showForm, setShowForm] = useState(false)
 
   const loadVehiculos = async () => {
-    const res = await getVehiculos();
-    setVehiculos(res.data);
+    const res = await getVehiculos()
+    setVehiculos(res.data)
   };
 
   const handleDelete = async (id) => {
-    await deleteVehiculo(id);
-    loadVehiculos();
+    await deleteVehiculo(id)
+    loadVehiculos()
   };
 
   const handleEdit = (vehiculo) => {
-    setEditing(vehiculo);
-    setShowForm(true);
+    setEditing(vehiculo)
+    setShowForm(true)
   };
 
   const handleCreate = () => {
-    setEditing(null);
-    setShowForm(true);
+    setEditing(null)
+    setShowForm(true)
   };
 
   useEffect(() => {
     loadVehiculos();
-  }, []);
+  }, [])
 
   return (
     <PageWrapper>
@@ -60,14 +60,14 @@ export default function Home() {
         />
       )}
     </PageWrapper>
-  );
+  )
 }
 
 const PageWrapper = styled.div`
   padding: 2rem;
   max-width: 1200px;
   margin: 0 auto;
-`;
+`
 
 const Header = styled.div`
   display: flex;
@@ -75,7 +75,7 @@ const Header = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin-bottom: 1.5rem;
-`;
+`
 
 const Title = styled.h1`
   font-size: 1.8rem;
@@ -85,7 +85,7 @@ const Title = styled.h1`
   @media (min-width: 600px) {
     margin: 0;
   }
-`;
+`
 
 const AddButton = styled.button`
   background-color: #007bff;
@@ -100,10 +100,10 @@ const AddButton = styled.button`
   &:hover {
     background-color: #0056b3;
   }
-`;
+`
 
 const Grid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 1.5rem;
-`;
+`
