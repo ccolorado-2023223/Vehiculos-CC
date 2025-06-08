@@ -13,5 +13,5 @@ app.use('/api/vehiculos', vehiculoRoutes)
 
 const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
-  console.log(`Servidor corriendo en http://localhost:${PORT}`)
+  console.log(`Servidor corriendo en: ${PORT}`)
 })
